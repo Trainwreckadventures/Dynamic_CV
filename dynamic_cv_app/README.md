@@ -4,4 +4,4 @@
 
 # Note: This .env file is committed for simplicity during development.
 
-# It was originally in the .gitignore, but since this aapi is temporary I am keeping it here for simplicity
+# It was originally in the .gitignore, but since this api is temporary I am keeping it here for simplicity
