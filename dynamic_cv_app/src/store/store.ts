@@ -1,8 +1,12 @@
-//need to update the logic as I go:
 import { configureStore } from "@reduxjs/toolkit";
+import { api } from "../services/api";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

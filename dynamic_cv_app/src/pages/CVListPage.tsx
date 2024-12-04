@@ -1,5 +1,5 @@
 import React from "react";
-
+//her kan man se sin egen cv om man er user, og alle cvs om man er admin?
 const CVListPage = () => {
   return (
     <div>

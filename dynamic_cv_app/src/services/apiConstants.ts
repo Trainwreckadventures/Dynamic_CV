@@ -1,4 +1,4 @@
-const urlKey: string = process.env.REACT_APP_API_KEY as string;
+const urlKey: string = "bb3bb53686a241c19ccc49dfa7dde3cd"; //dropper .env
 
 const serviceUrl: string = "https://crudcrud.com/api/";
 
