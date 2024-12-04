@@ -5,7 +5,7 @@ import "../styles/Navbar.css";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1 className="title">CV MAKER</h1>
+      <h1 className="title">Dynamic CV Portal</h1>
       <ul className="navList">
         <li>
           <Link to="/dashboard" className="link">
