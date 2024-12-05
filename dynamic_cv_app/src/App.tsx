@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import CVListPage from "./pages/CVListPage";
 import CreateCVPage from "./pages/CreateCVPage";
+import UserList from "./features/users/UserList";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />{" "}
+        <Route path="/user-list" element={<UserList />} />{" "}
         <Route path="/cv-list" element={<CVListPage />} />{" "}
         <Route path="/create-cv" element={<CreateCVPage />} />{" "}
       </Routes>
