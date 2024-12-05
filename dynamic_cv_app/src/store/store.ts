@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/auth/authSlice";
 import { api } from "../services/api";
 
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    auth: authReducer,
+    [api.reducerPath]: api.reducer, //RTK Query her
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(api.middleware), //Middleware for RTK Query
 });
 
 export type RootState = ReturnType<typeof store.getState>;

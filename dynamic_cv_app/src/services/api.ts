@@ -1,61 +1,70 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { catchUrl } from "../services/apiConstants"; //henter inn url + apinøkkel her
-import { User } from "../utils/types";
-//må kanskje hente inn cv/ cvs også
+import { catchUrl } from "../services/apiConstants";
+import { User, CV } from "../utils/types";
 
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: catchUrl,
   }),
+  tagTypes: ["Users", "CVs"],
   endpoints: (builder) => ({
-    // User endpoints her:
+    // User endpoints
     getUsers: builder.query<User[], void>({
       query: () => "users",
+      providesTags: ["Users"],
     }),
-    addUser: builder.mutation<User, User>({
+    addUser: builder.mutation<User, Partial<User>>({
       query: (user) => ({
         url: "users",
         method: "POST",
         body: user,
       }),
+      invalidatesTags: ["Users"],
     }),
-    updateUser: builder.mutation<User, { id: string; user: User }>({
+    updateUser: builder.mutation<User, { id: string; user: Partial<User> }>({
       query: ({ id, user }) => ({
         url: `users/${id}`,
         method: "PUT",
         body: user,
       }),
+      invalidatesTags: ["Users"],
     }),
     deleteUser: builder.mutation<void, string>({
       query: (id) => ({
         url: `users/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Users"],
     }),
-    //cv endepunkt her:
-    getCvs: builder.query<any[], void>({
+
+    // CV endpoints
+    getCvs: builder.query<CV[], void>({
       query: () => "cvs",
+      providesTags: ["CVs"],
     }),
-    addCv: builder.mutation<any, any>({
+    addCv: builder.mutation<CV, Partial<CV>>({
       query: (cv) => ({
         url: "cvs",
         method: "POST",
         body: cv,
       }),
+      invalidatesTags: ["CVs"],
     }),
-    updateCv: builder.mutation<any, { id: string; cv: any }>({
+    updateCv: builder.mutation<CV, { id: string; cv: Partial<CV> }>({
       query: ({ id, cv }) => ({
         url: `cvs/${id}`,
         method: "PUT",
         body: cv,
       }),
+      invalidatesTags: ["CVs"],
     }),
     deleteCv: builder.mutation<void, string>({
       query: (id) => ({
         url: `cvs/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["CVs"],
     }),
   }),
 });

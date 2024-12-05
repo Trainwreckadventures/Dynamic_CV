@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  role: string;
+  role: "admin" | "user";
 }
 
 export interface CV {

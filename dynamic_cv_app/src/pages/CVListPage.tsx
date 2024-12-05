@@ -1,10 +1,11 @@
 import React from "react";
-//her kan man se sin egen cv om man er user, og alle cvs om man er admin?
+import CVList from "../features/cv/CVList";
+
 const CVListPage = () => {
   return (
-    <div>
-      <h2>CV List</h2>
-      {/* Se liste over CV er (bare for admin eller for alle?) */}
+    <div className="container">
+      <CVList />
+      {/* Se liste over Alle CVs om du er admin eller egen om du er user */}
     </div>
   );
 };
