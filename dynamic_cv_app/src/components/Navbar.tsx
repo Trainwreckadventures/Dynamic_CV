@@ -9,22 +9,27 @@ const Navbar = () => {
       <ul className="navList">
         <li>
           <Link to="/dashboard" className="link">
-            Dashboard
-          </Link>
-        </li>
-        <li>
-          <Link to="/cv-list" className="link">
-            CV List
+            DASHBOARD
           </Link>
         </li>
         <li>
           <Link to="/create-cv" className="link">
-            Create CV
+            CREATE CV
+          </Link>
+        </li>
+        <li>
+          <Link to="/cv-list" className="link">
+            CVs
+          </Link>
+        </li>
+        <li>
+          <Link to="/user-list" className="link">
+            USERs
           </Link>
         </li>
         <li>
           <Link to="/" className="link">
-            Log in
+            LOG IN
           </Link>
         </li>
       </ul>
