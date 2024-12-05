@@ -37,7 +37,6 @@ export const api = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
-
     // CV endpoints
     getCvs: builder.query<CV[], void>({
       query: () => "cvs",
