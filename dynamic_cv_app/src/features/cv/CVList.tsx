@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetCvsQuery } from "../../services/api";
+import { useGetCvsQuery, useDeleteCvMutation } from "../../services/api";
 import { RootState } from "../../store/store";
 import { CV } from "../../utils/types";
-//!fikse edit/put logikk!
+//!Husk å fikse editknappen! Brukere må få lov å slette eller endre egen cv!
 const CVList = () => {
   const { role, userId } = useSelector((state: RootState) => state.auth);
   const { data: cvs, isLoading, error } = useGetCvsQuery();
+  const [deleteCv] = useDeleteCvMutation();
+
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading CVs</div>;
@@ -16,55 +19,77 @@ const CVList = () => {
       ? cvs || []
       : cvs?.filter((cv) => cv.user === userId) || [];
 
+  const toggleExpand = (id: string) => {
+    setExpandedId((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleDelete = async (id: string) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this CV? This will delete the CV permanently from the server."
+    );
+    if (!confirmed) return;
+
+    try {
+      await deleteCv(id).unwrap();
+      alert("CV deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting CV:", error);
+      alert("Failed to delete CV. Please try again.");
+    }
+  };
+
   return (
     <div>
       <h2>{role === "admin" ? "All CVs:" : "Your CV:"}</h2>
       {filteredCvs?.length === 0 ? (
         <p>You must be logged in to view the CV</p>
       ) : (
-        <ul>
+        <ul className="cv-list">
           {filteredCvs.map((cv: CV) => (
-            <li key={cv._id}>
-              <h3>{cv.personalInfo.name}</h3>
-              <p>Email: {cv.personalInfo.email}</p>
-              <p>Phone: {cv.personalInfo.phone}</p>
-              <h4>Skills:</h4>
-              <ul>
-                {cv.skills.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))}
-              </ul>
-              <h4>Education:</h4>
-              <ul>
-                {cv.education.map((education, index) => (
-                  <li key={index}>
-                    {education.institution} - {education.degree} (
-                    {education.year})
-                  </li>
-                ))}
-              </ul>
-              <h4>Experience:</h4>
-              <ul>
-                {cv.experience.map((experience, index) => (
-                  <li key={index}>
-                    {experience.title} at {experience.company} (
-                    {experience.years})
-                  </li>
-                ))}
-              </ul>
-              <h4>References:</h4>
-              <ul>
-                {cv.references.map((ref, index) => (
-                  <li key={index}>
-                    {ref.name} - {ref.contactInfo}
-                  </li>
-                ))}
-              </ul>
-              {role === "admin" && (
-                <>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </>
+            <li key={cv._id} className="cv-item">
+              <h3 onClick={() => toggleExpand(cv._id)} className="cv-name">
+                {cv.personalInfo.name}
+              </h3>
+
+              {expandedId === cv._id && (
+                <div className="cv-details">
+                  <p>
+                    <strong>Email:</strong> {cv.personalInfo.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {cv.personalInfo.phone}
+                  </p>
+                  <h4>Skills:</h4>
+                  <p>{cv.skills.join(", ")}</p>
+                  <h4>Education:</h4>
+                  {cv.education.map((education, index) => (
+                    <p key={index}>
+                      <strong>{education.institution}</strong> -{" "}
+                      {education.degree} ({education.year})
+                    </p>
+                  ))}
+                  <h4>Experience:</h4>
+                  {cv.experience.map((experience, index) => (
+                    <p key={index}>
+                      {experience.title} at {experience.company} (
+                      {experience.years})
+                    </p>
+                  ))}
+                  <h4>References:</h4>
+                  {cv.references.map((ref, index) => (
+                    <p key={index}>
+                      <strong>{ref.name}</strong> - {ref.contactInfo}
+                    </p>
+                  ))}
+                  {role === "admin" && (
+                    <div className="button-container">
+                      <button>Edit</button>
+                      <button onClick={() => handleDelete(cv._id)}>
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               )}
             </li>
           ))}

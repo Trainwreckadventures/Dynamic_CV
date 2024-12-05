@@ -39,6 +39,8 @@ h1 {
 }
 
 button {
+  margin-top: 2rem;
+  margin-right: 0.5rem;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -50,7 +52,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #61dafb;
 }
 button:focus,
 button:focus-visible {
@@ -60,26 +62,26 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    color: #61dafb;
   }
 }
 
 .container {
   max-width: 1200px;
-  width: 100%;
+  margin: 0 auto;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  text-align: left;
-  font-size: 1.2em;
-  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cv-wrapper {
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -92,6 +94,15 @@ ul {
 ul li {
   margin-bottom: 1rem;
   font-size: 1.1em;
-  padding-left: 20px;
+  padding-left: 10px;
   padding-top: 1rem;
+}
+
+.cv-name {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cv-name:hover {
+  color: #61dafb;
 }

@@ -20,13 +20,13 @@ const UserList = () => {
     if (!currentUser) {
       return <div>User not found.</div>;
     }
-
+    //!Må få lov å edite og slette seg selv!:
     return (
       <div>
         <h2>Your Information</h2>
         <ul>
           <li key={currentUser._id}>
-            {currentUser.name} ({currentUser.email}) - {currentUser.role}
+            {currentUser.name} ({currentUser.email}) : {currentUser.role}
           </li>
         </ul>
       </div>
@@ -50,14 +50,22 @@ const UserList = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading users</div>;
-
+  //!Må legge til editknapp og editfunksjon også!
   return (
     <div>
       <h2>User List</h2>
       <ul>
         {users?.map((user: User) => (
-          <li key={user._id}>
-            {user.name} ({user.email}) - {user.role}
+          <li key={user._id} style={{ marginBottom: "1rem" }}>
+            <p>
+              <strong>Name:</strong> {user.name}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Role:</strong> {user.role}
+            </p>
             {role === "admin" && (
               <button onClick={() => handleDelete(user._id)}>Delete</button>
             )}
