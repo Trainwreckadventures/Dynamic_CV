@@ -59,6 +59,22 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.fab-save-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #213547;
+  border-radius: 25%;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  z-index: 10;
+}
+
+.fab-save-button:hover {
+  background-color: #4caf50;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
