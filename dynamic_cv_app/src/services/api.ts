@@ -56,6 +56,9 @@ export const api = createApi({
       query: ({ id, cv }) => ({
         url: `cvs/${id}`,
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: cv,
       }),
       invalidatesTags: ["CVs"],
