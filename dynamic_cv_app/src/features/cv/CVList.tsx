@@ -3,13 +3,19 @@ import { useSelector } from "react-redux";
 import { useGetCvsQuery, useDeleteCvMutation } from "../../services/api";
 import { RootState } from "../../store/store";
 import { CV } from "../../utils/types";
-//!Husk å fikse editknappen! Brukere må få lov å slette eller endre egen cv!
+
 const CVList = () => {
-  const { role, userId } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, role, userId } = useSelector(
+    (state: RootState) => state.auth
+  );
   const { data: cvs, isLoading, error } = useGetCvsQuery();
   const [deleteCv] = useDeleteCvMutation();
 
   const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  if (!isAuthenticated) {
+    return <div>Please log in to view the CVs.</div>;
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading CVs</div>;
@@ -40,9 +46,12 @@ const CVList = () => {
 
   return (
     <div>
-      <h2>{role === "admin" ? "All CVs:" : "Your CV:"}</h2>
+      <h2>{role === "admin" ? "All CVs" : "Your CV"}</h2>
       {filteredCvs?.length === 0 ? (
-        <p>You must be logged in to view the CV</p>
+        <p>
+          No CVs found.{" "}
+          {role === "admin" ? "Try adding CVs." : "Please create your CV."}
+        </p>
       ) : (
         <ul className="cv-list">
           {filteredCvs.map((cv: CV) => (
@@ -81,14 +90,14 @@ const CVList = () => {
                       <strong>{ref.name}</strong> - {ref.contactInfo}
                     </p>
                   ))}
-                  {role === "admin" && (
+                  {role === "admin" || cv.user === userId ? (
                     <div className="button-container">
                       <button>Edit</button>
                       <button onClick={() => handleDelete(cv._id)}>
                         Delete
                       </button>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               )}
             </li>

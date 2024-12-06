@@ -26,9 +26,11 @@ export const api = createApi({
       query: ({ id, user }) => ({
         url: `users/${id}`,
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: user,
       }),
-      invalidatesTags: ["Users"],
     }),
     deleteUser: builder.mutation<void, string>({
       query: (id) => ({
