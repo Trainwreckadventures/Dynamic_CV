@@ -102,7 +102,7 @@ const CVList = () => {
           {role === "admin" ? "Try adding CVs." : "Please create your CV."}
         </p>
       ) : (
-        <ul className="cv-list">
+        <ul className="form-group">
           {filteredCvs.map((cv: CV) => (
             <li key={cv._id} className="cv-item">
               {editingCvId === cv._id ? (
