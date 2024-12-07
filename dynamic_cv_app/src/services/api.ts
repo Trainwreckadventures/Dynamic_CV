@@ -39,15 +39,19 @@ export const api = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+
     // CV endpoints
     getCvs: builder.query<CV[], void>({
       query: () => "cvs",
       providesTags: ["CVs"],
     }),
-    addCv: builder.mutation<CV, Partial<CV>>({
+    addCv: builder.mutation<CV, { id: string; cv: Omit<CV, "_id"> }>({
       query: (cv) => ({
         url: "cvs",
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: cv,
       }),
       invalidatesTags: ["CVs"],

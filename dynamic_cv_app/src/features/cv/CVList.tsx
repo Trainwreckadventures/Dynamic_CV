@@ -8,7 +8,7 @@ import {
 import { RootState } from "../../store/store";
 import { CV } from "../../utils/types";
 import EditCV from "./EditCV";
-
+//!failsafe needed incase a user get's deleted since I nested their info in the cv...
 const CVList = () => {
   const { isAuthenticated, role, userId } = useSelector(
     (state: RootState) => state.auth
@@ -60,7 +60,6 @@ const CVList = () => {
     }
   };
 
-  //setter opp en alert så bruker får prompt om å huske å lagre endringer:
   const handleEdit = (cv: CV) => {
     if (!alertShown) {
       alert("Remember to press the save button after making your changes!");
@@ -115,7 +114,7 @@ const CVList = () => {
               ) : (
                 <div>
                   <h3 onClick={() => toggleExpand(cv._id)} className="cv-name">
-                    {cv.personalInfo.name}
+                    {cv.personalInfo?.name || "No Name Available"}
                   </h3>
 
                   {expandedId === cv._id && (

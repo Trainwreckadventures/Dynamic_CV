@@ -1,9 +1,10 @@
 import React from "react";
+import CreateCV from "../features/cv/CreateCV";
 
 const CreateCVPage = () => {
   return (
     <div>
-      <h2>Create CV</h2>
+      <CreateCV />
       {/* CV skjema her */}
     </div>
   );
