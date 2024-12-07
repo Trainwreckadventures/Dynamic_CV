@@ -6,18 +6,18 @@ const CreateUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
   const [addUser] = useAddUserMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Default role is aways user (need to work out the logic to change roles in userlist for admin! That's a job for future me!)
     const newUser: User = {
       _id: "",
       name,
       email,
       password,
-      role,
+      role: "user",
     };
 
     try {
@@ -25,7 +25,6 @@ const CreateUser = () => {
       setName("");
       setEmail("");
       setPassword("");
-      setRole("user");
     } catch (error) {
       console.error("Error creating user", error);
     }
@@ -60,13 +59,6 @@ const CreateUser = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </div>
-      <div>
-        <label>Role:</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
       </div>
       <button type="submit">Create User</button>
     </form>

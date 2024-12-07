@@ -7,7 +7,7 @@ import {
 } from "../../services/api";
 import { RootState } from "../../store/store";
 import { User } from "../../utils/types";
-
+//!making sure admin can change roles prooved to be more difficult than I first thought...need to figgure it out! maybe I only have one admin...overworked admin...
 const UserList = () => {
   const { isAuthenticated, role, userId } = useSelector(
     (state: RootState) => state.auth
@@ -74,7 +74,7 @@ const UserList = () => {
 
   const filteredUsers =
     role === "admin" ? users : users?.filter((user) => user._id === userId);
-
+  //! need to fix the ugly layout when I edit!
   return (
     <div>
       <h2>{role === "admin" ? "All Users" : "Your Information"}</h2>
