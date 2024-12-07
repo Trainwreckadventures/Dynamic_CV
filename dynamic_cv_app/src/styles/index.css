@@ -63,7 +63,7 @@ button:focus-visible {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #213547;
+  background-color: #227124;
   border-radius: 25%;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -121,4 +121,23 @@ ul li {
 
 .cv-name:hover {
   color: #61dafb;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.personal-info label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.personal-info input {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }

@@ -6,7 +6,7 @@ interface EditCVProps {
   onSave: (updatedCv: CV) => void;
   onCancel: () => void;
 }
-
+//Må fikse inputfeltene så det ser litt bedre ut når jeg får tid!
 const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
   const [editedCv, setEditedCv] = useState<CV>(cv);
   const newItemRef = useRef<HTMLInputElement | null>(null);
@@ -69,58 +69,60 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
   const handleSave = () => {
     onSave(editedCv);
   };
-  //må fikse at alt bare smosher seg i starten av skjemaet her:
+
   return (
     <div>
       <h3>Edit CV</h3>
-      <label>
-        <strong>Name:</strong>
-        <input
-          type="text"
-          value={editedCv.personalInfo?.name || ""}
-          onChange={(e) =>
-            setEditedCv({
-              ...editedCv,
-              personalInfo: {
-                ...editedCv.personalInfo,
-                name: e.target.value,
-              },
-            })
-          }
-        />
-      </label>
-      <label>
-        <strong>Email:</strong>
-        <input
-          type="email"
-          value={editedCv.personalInfo?.email || ""}
-          onChange={(e) =>
-            setEditedCv({
-              ...editedCv,
-              personalInfo: {
-                ...editedCv.personalInfo,
-                email: e.target.value,
-              },
-            })
-          }
-        />
-      </label>
-      <label>
-        <strong>Phone:</strong>
-        <input
-          type="text"
-          value={editedCv.personalInfo?.phone || ""}
-          onChange={(e) =>
-            setEditedCv({
-              ...editedCv,
-              personalInfo: {
-                ...editedCv.personalInfo,
-                phone: e.target.value,
-              },
-            })
-          }
-        />
-      </label>
+      <div className="personal-info">
+        <label>
+          <strong>Name:</strong>
+          <input
+            type="text"
+            value={editedCv.personalInfo?.name || ""}
+            onChange={(e) =>
+              setEditedCv({
+                ...editedCv,
+                personalInfo: {
+                  ...editedCv.personalInfo,
+                  name: e.target.value,
+                },
+              })
+            }
+          />
+        </label>
+        <label>
+          <strong>Email:</strong>
+          <input
+            type="email"
+            value={editedCv.personalInfo?.email || ""}
+            onChange={(e) =>
+              setEditedCv({
+                ...editedCv,
+                personalInfo: {
+                  ...editedCv.personalInfo,
+                  email: e.target.value,
+                },
+              })
+            }
+          />
+        </label>
+        <label>
+          <strong>Phone:</strong>
+          <input
+            type="text"
+            value={editedCv.personalInfo?.phone || ""}
+            onChange={(e) =>
+              setEditedCv({
+                ...editedCv,
+                personalInfo: {
+                  ...editedCv.personalInfo,
+                  phone: e.target.value,
+                },
+              })
+            }
+          />
+        </label>
+      </div>
 
       <h4>Skills:</h4>
       {editedCv.skills.map((skill, index) => (
@@ -205,13 +207,12 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
           </button>
         </div>
       ))}
-      <button onClick={() => handleAdd("references")}>Add Reference</button>
 
+      <button onClick={() => handleAdd("references")}>Add Reference</button>
       <div className="button-container">
         <button className="fab-save-button" onClick={handleSave}>
           Save
         </button>
-
         <button onClick={onCancel}>Cancel</button>
       </div>
     </div>
