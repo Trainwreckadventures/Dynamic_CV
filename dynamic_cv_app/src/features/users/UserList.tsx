@@ -76,7 +76,7 @@ const UserList = () => {
     role === "admin" ? users : users?.filter((user) => user._id === userId);
   //! need to fix the ugly layout when I edit!
   return (
-    <div>
+    <div className="form-group">
       <h2>{role === "admin" ? "All Users" : "Your Information"}</h2>
       <ul>
         {filteredUsers?.map((user: User) => (
@@ -103,7 +103,9 @@ const UserList = () => {
                     }
                   />
                 </label>
-                <button onClick={handleSave}>Save</button>
+                <button onClick={handleSave} className="fab-save-button">
+                  Save
+                </button>
                 <button onClick={() => setEditingUserId(null)}>Cancel</button>
               </div>
             ) : (

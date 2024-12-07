@@ -6,7 +6,7 @@ interface EditCVProps {
   onSave: (updatedCv: CV) => void;
   onCancel: () => void;
 }
-//Må fikse inputfeltene så det ser litt bedre ut når jeg får tid!
+
 const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
   const [editedCv, setEditedCv] = useState<CV>(cv);
   const newItemRef = useRef<HTMLInputElement | null>(null);
@@ -71,9 +71,9 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
   };
 
   return (
-    <div>
+    <div className="form-group">
       <h3>Edit CV</h3>
-      <div className="personal-info">
+      <div>
         <label>
           <strong>Name:</strong>
           <input
@@ -88,6 +88,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
                 },
               })
             }
+            placeholder="Enter your full name"
           />
         </label>
         <label>
@@ -104,6 +105,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
                 },
               })
             }
+            placeholder="Enter your email address"
           />
         </label>
         <label>
@@ -120,6 +122,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
                 },
               })
             }
+            placeholder="Enter your phone number"
           />
         </label>
       </div>
@@ -131,6 +134,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
             type="text"
             value={skill}
             onChange={(e) => handleChange(e, "", "skills", index)}
+            placeholder="Enter a skill"
           />
           <button onClick={() => handleRemove("skills", index)}>Remove</button>
         </div>
@@ -144,16 +148,19 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
             type="text"
             value={education.institution}
             onChange={(e) => handleChange(e, "institution", "education", index)}
+            placeholder="Enter institution name"
           />
           <input
             type="text"
             value={education.degree}
             onChange={(e) => handleChange(e, "degree", "education", index)}
+            placeholder="Enter your degree"
           />
           <input
             type="text"
             value={education.year}
             onChange={(e) => handleChange(e, "year", "education", index)}
+            placeholder="Enter graduation year"
           />
           <button onClick={() => handleRemove("education", index)}>
             Remove
@@ -169,16 +176,19 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
             type="text"
             value={experience.title}
             onChange={(e) => handleChange(e, "title", "experience", index)}
+            placeholder="Enter job title"
           />
           <input
             type="text"
             value={experience.company}
             onChange={(e) => handleChange(e, "company", "experience", index)}
+            placeholder="Enter company name"
           />
           <input
             type="text"
             value={experience.years}
             onChange={(e) => handleChange(e, "years", "experience", index)}
+            placeholder="Enter years of experience"
           />
           <button onClick={() => handleRemove("experience", index)}>
             Remove
@@ -194,6 +204,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
             type="text"
             value={ref.name}
             onChange={(e) => handleChange(e, "name", "references", index)}
+            placeholder="Enter reference's name"
           />
           <input
             type="text"
@@ -201,15 +212,16 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
             onChange={(e) =>
               handleChange(e, "contactInfo", "references", index)
             }
+            placeholder="Enter reference's email"
           />
           <button onClick={() => handleRemove("references", index)}>
             Remove
           </button>
         </div>
       ))}
-
       <button onClick={() => handleAdd("references")}>Add Reference</button>
-      <div className="button-container">
+
+      <div>
         <button className="fab-save-button" onClick={handleSave}>
           Save
         </button>
