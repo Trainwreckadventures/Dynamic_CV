@@ -45,7 +45,7 @@ export const api = createApi({
       query: () => "cvs",
       providesTags: ["CVs"],
     }),
-    addCv: builder.mutation<CV, { id: string; cv: Omit<CV, "_id"> }>({
+    addCv: builder.mutation<CV, Omit<CV, "_id">>({
       query: (cv) => ({
         url: "cvs",
         method: "POST",

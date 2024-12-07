@@ -69,7 +69,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="form-group">
       <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
       {error && <p>Error loading users. Please try again later.</p>}
 

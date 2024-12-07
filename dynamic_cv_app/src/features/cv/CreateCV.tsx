@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAddCvMutation, useGetCvsQuery } from "../../services/api";
 import { RootState } from "../../store/store";
 import { CV } from "../../utils/types";
-//! need to fix so you don't see the form when you're not logged in!
+
 const CreateCV = () => {
   const { userId } = useSelector((state: RootState) => state.auth);
-  const { data: userCvs } = useGetCvsQuery();
+  const { data: userCvs, refetch } = useGetCvsQuery();
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     email: "",
@@ -93,14 +93,12 @@ const CreateCV = () => {
       references,
     };
 
-    const payload = {
-      id: userId as string,
-      cv: newCv,
-    };
+    console.log("Payload being sent:", newCv);
 
     try {
-      await addCv(payload).unwrap();
+      await addCv(newCv).unwrap();
       alert("CV created successfully!");
+      refetch();
       navigate("/cvs");
     } catch (error) {
       console.error("Error creating CV", error);
@@ -120,7 +118,7 @@ const CreateCV = () => {
     setReferences([...references, { name: "", contactInfo: "" }]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-group">
       <h2>Create New CV</h2>
 
       {canCreate ? (
@@ -249,8 +247,8 @@ const CreateCV = () => {
       ) : (
         <div>
           <p>
-            You already have a CV associated with your account, you can edit it
-            on the <Link to="/cv-list">CV page</Link>.
+            You already have a CV associated with your account, you can view it
+            here: <Link to="/cv-list">CVs</Link>.
           </p>
         </div>
       )}

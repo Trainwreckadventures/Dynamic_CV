@@ -148,7 +148,7 @@ const CVList = () => {
                         </p>
                       ))}
                       {role === "admin" || cv.user === userId ? (
-                        <div className="button-container">
+                        <div>
                           <button onClick={() => handleEdit(cv)}>Edit</button>
                           <button onClick={() => handleDelete(cv._id)}>
                             Delete

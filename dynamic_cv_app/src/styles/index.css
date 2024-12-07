@@ -54,6 +54,8 @@ h2 {
 
 button {
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -76,9 +78,7 @@ button:focus-visible {
 }
 
 .fab-save-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  margin-right: 25px;
   background-color: #227124;
   border-radius: 25%;
   padding: 15px;
@@ -221,31 +221,4 @@ h4 {
 .cv-details h4 {
   margin-top: 10px;
   color: #fff;
-}
-
-.button-container {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-button {
-  padding: 8px 12px;
-  font-size: 1rem;
-  background-color: #1a1a1a;
-  color: white;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #61dafb;
-}
-
-button:focus,
-button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px #61dafb;
 }
