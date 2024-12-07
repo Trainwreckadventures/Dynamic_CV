@@ -27,6 +27,8 @@ const CVList = () => {
     references: [],
   });
 
+  const [alertShown, setAlertShown] = useState(false);
+
   if (!isAuthenticated) {
     return <div>Please log in to view stored CVs.</div>;
   }
@@ -58,7 +60,12 @@ const CVList = () => {
     }
   };
 
+  //setter opp en alert så bruker får prompt om å huske å lagre endringer:
   const handleEdit = (cv: CV) => {
+    if (!alertShown) {
+      alert("Remember to press the save button after making your changes!");
+      setAlertShown(true);
+    }
     setEditingCvId(cv._id);
     setEditedCv({ ...cv });
   };
