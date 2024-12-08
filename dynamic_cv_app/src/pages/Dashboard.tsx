@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useGetUsersQuery } from "../services/api";
 import { RootState } from "../store/store";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { isAuthenticated, userId, role } = useSelector(
@@ -15,7 +16,10 @@ const Dashboard = () => {
     <div className="container">
       <h2>Welcome to the Dynamic CV Maker!</h2>
       {!isAuthenticated && (
-        <p>To be able to use our services, you must be logged in.</p>
+        <p>
+          To be able to use our services, you must be{" "}
+          <Link to="/">logged in</Link>
+        </p>
       )}
       {isAuthenticated && user && (
         <div>
