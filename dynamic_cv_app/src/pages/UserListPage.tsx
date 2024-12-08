@@ -6,7 +6,7 @@ import UserList from "../features/users/UserList.tsx";
 const UserListPage = () => {
   return (
     <div className="container">
-      <h2>Welcome to Dynamic CV Maker!</h2>
+      <h2>Userlist</h2>
       <UserList />
     </div>
   );

@@ -41,7 +41,7 @@ const LoginForm = () => {
     if (user.role === "admin") {
       navigate("/dashboard");
     } else {
-      navigate("/cvs");
+      navigate("/dashboard");
     }
   };
 
@@ -69,82 +69,84 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="form-group">
-      <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
-      {error && <p>Error loading users. Please try again later.</p>}
+    <div className="container">
+      <div className="form-group">
+        <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
+        {error && <p>Error loading users. Please try again later.</p>}
 
-      {isSignUp ? (
-        <form onSubmit={handleSignUp}>
-          <div>
-            <label>Name:</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Sign Up"}
-          </button>
-          <p>
-            Already have an account?{" "}
-            <a href="#" onClick={() => setIsSignUp(false)}>
-              Log in
-            </a>
-          </p>
-        </form>
-      ) : (
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Log In"}
-          </button>
-          <p>
-            Don't have an account?{" "}
-            <a href="#" onClick={() => setIsSignUp(true)}>
-              Sign Up
-            </a>
-          </p>
-        </form>
-      )}
+        {isSignUp ? (
+          <form onSubmit={handleSignUp}>
+            <div>
+              <label>Name:</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Sign Up"}
+            </button>
+            <p>
+              Already have an account?{" "}
+              <a href="#" onClick={() => setIsSignUp(false)}>
+                Log in
+              </a>
+            </p>
+          </form>
+        ) : (
+          <form onSubmit={handleLogin}>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Log In"}
+            </button>
+            <p>
+              Don't have an account?{" "}
+              <a href="#" onClick={() => setIsSignUp(true)}>
+                Sign Up
+              </a>
+            </p>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

@@ -118,141 +118,145 @@ const CreateCV = () => {
     setReferences([...references, { name: "", contactInfo: "" }]);
 
   return (
-    <form onSubmit={handleSubmit} className="form-group">
-      <h2>Create New CV</h2>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="form-group">
+        <h2>Create New CV</h2>
 
-      {canCreate ? (
-        <>
+        {canCreate ? (
+          <>
+            <div>
+              <label>Name:</label>
+              <input
+                type="text"
+                value={personalInfo.name}
+                onChange={(e) => handlePersonalInfoChange(e, "name")}
+                required
+              />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={personalInfo.email}
+                onChange={(e) => handlePersonalInfoChange(e, "email")}
+                required
+              />
+            </div>
+            <div>
+              <label>Phone:</label>
+              <input
+                type="text"
+                value={personalInfo.phone}
+                onChange={(e) => handlePersonalInfoChange(e, "phone")}
+                required
+              />
+            </div>
+
+            <h4>Skills:</h4>
+            {skills.map((skill, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  value={skill}
+                  onChange={(e) => handleSkillsChange(e, index)}
+                />
+              </div>
+            ))}
+            <button type="button" onClick={handleAddSkill}>
+              Add Skill
+            </button>
+
+            <h4>Education:</h4>
+            {education.map((edu, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  value={edu.institution}
+                  onChange={(e) =>
+                    handleEducationChange(e, "institution", index)
+                  }
+                  placeholder="Institution"
+                />
+                <input
+                  type="text"
+                  value={edu.degree}
+                  onChange={(e) => handleEducationChange(e, "degree", index)}
+                  placeholder="Degree"
+                />
+                <input
+                  type="text"
+                  value={edu.year}
+                  onChange={(e) => handleEducationChange(e, "year", index)}
+                  placeholder="Year"
+                />
+              </div>
+            ))}
+            <button type="button" onClick={handleAddEducation}>
+              Add Education
+            </button>
+
+            <h4>Experience:</h4>
+            {experience.map((exp, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  value={exp.title}
+                  onChange={(e) => handleExperienceChange(e, "title", index)}
+                  placeholder="Title"
+                />
+                <input
+                  type="text"
+                  value={exp.company}
+                  onChange={(e) => handleExperienceChange(e, "company", index)}
+                  placeholder="Company"
+                />
+                <input
+                  type="text"
+                  value={exp.years}
+                  onChange={(e) => handleExperienceChange(e, "years", index)}
+                  placeholder="Years"
+                />
+              </div>
+            ))}
+            <button type="button" onClick={handleAddExperience}>
+              Add Experience
+            </button>
+
+            <h4>References:</h4>
+            {references.map((ref, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  value={ref.name}
+                  onChange={(e) => handleReferencesChange(e, "name", index)}
+                  placeholder="Name"
+                />
+                <input
+                  type="text"
+                  value={ref.contactInfo}
+                  onChange={(e) =>
+                    handleReferencesChange(e, "contactInfo", index)
+                  }
+                  placeholder="Contact Info"
+                />
+              </div>
+            ))}
+            <button type="button" onClick={handleAddReference}>
+              Add Reference
+            </button>
+
+            <button type="submit">Submit CV</button>
+          </>
+        ) : (
           <div>
-            <label>Name:</label>
-            <input
-              type="text"
-              value={personalInfo.name}
-              onChange={(e) => handlePersonalInfoChange(e, "name")}
-              required
-            />
+            <p>
+              You already have a CV associated with your account, you can view
+              it here: <Link to="/cv-list">CVs</Link>.
+            </p>
           </div>
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={personalInfo.email}
-              onChange={(e) => handlePersonalInfoChange(e, "email")}
-              required
-            />
-          </div>
-          <div>
-            <label>Phone:</label>
-            <input
-              type="text"
-              value={personalInfo.phone}
-              onChange={(e) => handlePersonalInfoChange(e, "phone")}
-              required
-            />
-          </div>
-
-          <h4>Skills:</h4>
-          {skills.map((skill, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                value={skill}
-                onChange={(e) => handleSkillsChange(e, index)}
-              />
-            </div>
-          ))}
-          <button type="button" onClick={handleAddSkill}>
-            Add Skill
-          </button>
-
-          <h4>Education:</h4>
-          {education.map((edu, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                value={edu.institution}
-                onChange={(e) => handleEducationChange(e, "institution", index)}
-                placeholder="Institution"
-              />
-              <input
-                type="text"
-                value={edu.degree}
-                onChange={(e) => handleEducationChange(e, "degree", index)}
-                placeholder="Degree"
-              />
-              <input
-                type="text"
-                value={edu.year}
-                onChange={(e) => handleEducationChange(e, "year", index)}
-                placeholder="Year"
-              />
-            </div>
-          ))}
-          <button type="button" onClick={handleAddEducation}>
-            Add Education
-          </button>
-
-          <h4>Experience:</h4>
-          {experience.map((exp, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                value={exp.title}
-                onChange={(e) => handleExperienceChange(e, "title", index)}
-                placeholder="Title"
-              />
-              <input
-                type="text"
-                value={exp.company}
-                onChange={(e) => handleExperienceChange(e, "company", index)}
-                placeholder="Company"
-              />
-              <input
-                type="text"
-                value={exp.years}
-                onChange={(e) => handleExperienceChange(e, "years", index)}
-                placeholder="Years"
-              />
-            </div>
-          ))}
-          <button type="button" onClick={handleAddExperience}>
-            Add Experience
-          </button>
-
-          <h4>References:</h4>
-          {references.map((ref, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                value={ref.name}
-                onChange={(e) => handleReferencesChange(e, "name", index)}
-                placeholder="Name"
-              />
-              <input
-                type="text"
-                value={ref.contactInfo}
-                onChange={(e) =>
-                  handleReferencesChange(e, "contactInfo", index)
-                }
-                placeholder="Contact Info"
-              />
-            </div>
-          ))}
-          <button type="button" onClick={handleAddReference}>
-            Add Reference
-          </button>
-
-          <button type="submit">Submit CV</button>
-        </>
-      ) : (
-        <div>
-          <p>
-            You already have a CV associated with your account, you can view it
-            here: <Link to="/cv-list">CVs</Link>.
-          </p>
-        </div>
-      )}
-    </form>
+        )}
+      </form>
+    </div>
   );
 };
 
