@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetUsersQuery, useAddUserMutation } from "../../services/api";
 import { login } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
 import { User } from "../../utils/types";
-//now you can create a new user on the log in page :D
+
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [name, setName] = useState("");
-  const [role] = useState("user");
   const [isSignUp, setIsSignUp] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -38,11 +38,7 @@ const LoginForm = () => {
 
     dispatch(login({ userId: user._id, role: user.role }));
 
-    if (user.role === "admin") {
-      navigate("/dashboard");
-    } else {
-      navigate("/dashboard");
-    }
+    navigate("/dashboard");
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -56,12 +52,12 @@ const LoginForm = () => {
     };
 
     try {
-      await addUser(newUser).unwrap();
-      alert("User created successfully! Please log in.");
-      setIsSignUp(false);
-      setEmail("");
-      setPassword("");
-      setName("");
+      const createdUser = await addUser(newUser).unwrap();
+
+      dispatch(login({ userId: createdUser._id, role: createdUser.role }));
+      alert("User created successfully!");
+
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error creating user", error);
       alert("Failed to create user. Please try again.");
