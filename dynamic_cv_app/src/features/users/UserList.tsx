@@ -76,64 +76,66 @@ const UserList = () => {
     role === "admin" ? users : users?.filter((user) => user._id === userId);
   //! need to fix the ugly layout when I edit!
   return (
-    <div className="form-group">
-      <h2>{role === "admin" ? "All Users" : "Your Information"}</h2>
-      <ul>
-        {filteredUsers?.map((user: User) => (
-          <li key={user._id} style={{ marginBottom: "1rem" }}>
-            {editingUserId === user._id ? (
-              <div>
-                <label>
-                  <strong>Name:</strong>
-                  <input
-                    type="text"
-                    value={editedUser.name || ""}
-                    onChange={(e) =>
-                      setEditedUser({ ...editedUser, name: e.target.value })
-                    }
-                  />
-                </label>
-                <label>
-                  <strong>Email:</strong>
-                  <input
-                    type="email"
-                    value={editedUser.email || ""}
-                    onChange={(e) =>
-                      setEditedUser({ ...editedUser, email: e.target.value })
-                    }
-                  />
-                </label>
-                <button onClick={handleSave} className="fab-save-button">
-                  Save
-                </button>
-                <button onClick={() => setEditingUserId(null)}>Cancel</button>
-              </div>
-            ) : (
-              <div>
-                <p>
-                  <strong>Name:</strong> {user.name}
-                </p>
-                <p>
-                  <strong>Email:</strong> {user.email}
-                </p>
-                <p>
-                  <strong>Role:</strong> {user.role}
-                </p>
-                <div className="button-container">
-                  {role === "admin" || user._id === userId ? (
-                    <button onClick={() => handleEdit(user)}>Edit</button>
-                  ) : null}
-                  {role === "admin" || user._id === userId ? (
-                    <button onClick={() => handleDelete(user._id)}>
-                      Delete
-                    </button>
-                  ) : null}
+    <div className="container">
+      <div className="form-group">
+        <h2>{role === "admin" ? "All Users" : "Your Information"}</h2>
+        <ul>
+          {filteredUsers?.map((user: User) => (
+            <li key={user._id} style={{ marginBottom: "1rem" }}>
+              {editingUserId === user._id ? (
+                <div>
+                  <label>
+                    <strong>Name:</strong>
+                    <input
+                      type="text"
+                      value={editedUser.name || ""}
+                      onChange={(e) =>
+                        setEditedUser({ ...editedUser, name: e.target.value })
+                      }
+                    />
+                  </label>
+                  <label>
+                    <strong>Email:</strong>
+                    <input
+                      type="email"
+                      value={editedUser.email || ""}
+                      onChange={(e) =>
+                        setEditedUser({ ...editedUser, email: e.target.value })
+                      }
+                    />
+                  </label>
+                  <button onClick={handleSave} className="fab-save-button">
+                    Save
+                  </button>
+                  <button onClick={() => setEditingUserId(null)}>Cancel</button>
                 </div>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+              ) : (
+                <div>
+                  <p>
+                    <strong>Name:</strong> {user.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {user.email}
+                  </p>
+                  <p>
+                    <strong>Role:</strong> {user.role}
+                  </p>
+                  <div className="button-container">
+                    {role === "admin" || user._id === userId ? (
+                      <button onClick={() => handleEdit(user)}>Edit</button>
+                    ) : null}
+                    {role === "admin" || user._id === userId ? (
+                      <button onClick={() => handleDelete(user._id)}>
+                        Delete
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
