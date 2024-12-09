@@ -15,6 +15,7 @@
   list-style: none;
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 .link {
@@ -25,4 +26,13 @@
 
 .link:hover {
   color: #61dafb;
+}
+
+.link-button {
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
