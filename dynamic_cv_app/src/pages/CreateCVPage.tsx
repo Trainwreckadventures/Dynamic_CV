@@ -35,7 +35,7 @@ const CreateCVPage = () => {
   return (
     <div>
       <CreateCV />
-      {/* Render the CreateCV form only if user does not already have a CV */}
+      {/* Renders the CreateCV-form, but only if user does not have a CV in the database */}
     </div>
   );
 };
