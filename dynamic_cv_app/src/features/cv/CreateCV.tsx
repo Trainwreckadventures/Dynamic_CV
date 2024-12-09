@@ -7,7 +7,7 @@ import { CV } from "../../utils/types";
 
 const CreateCV = () => {
   const { userId } = useSelector((state: RootState) => state.auth);
-  const { data: userCvs, refetch } = useGetCvsQuery();
+  const { data: userCvs, isLoading } = useGetCvsQuery();
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     email: "",
@@ -84,6 +84,15 @@ const CreateCV = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const existingCv = userCvs?.find((cv: CV) => cv.user === userId);
+
+    if (existingCv) {
+      alert(
+        "You already have a CV associated with your account, you can edit it on the CVs page!"
+      );
+      return;
+    }
+
     const newCv: Omit<CV, "_id"> = {
       user: userId as string,
       personalInfo,
@@ -93,13 +102,9 @@ const CreateCV = () => {
       references,
     };
 
-    console.log("Payload being sent:", newCv);
-
     try {
       await addCv(newCv).unwrap();
       alert("CV created successfully!");
-      refetch();
-      navigate("/cvs");
     } catch (error) {
       console.error("Error creating CV", error);
       alert("Failed to create CV. Please try again.");
@@ -116,6 +121,10 @@ const CreateCV = () => {
 
   const handleAddReference = () =>
     setReferences([...references, { name: "", contactInfo: "" }]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">
