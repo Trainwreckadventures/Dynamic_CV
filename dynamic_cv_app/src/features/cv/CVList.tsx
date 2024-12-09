@@ -8,6 +8,7 @@ import {
 import { RootState } from "../../store/store";
 import { CV } from "../../utils/types";
 import EditCV from "./EditCV";
+import CVPdf from "./CVPdf";
 //!failsafe needed incase a user get's deleted since I nested their info in the cv...
 const CVList = () => {
   const { isAuthenticated, role, userId } = useSelector(
@@ -153,6 +154,7 @@ const CVList = () => {
                           <button onClick={() => handleDelete(cv._id)}>
                             Delete
                           </button>
+                          <CVPdf cv={cv} />
                         </div>
                       ) : null}
                     </div>
