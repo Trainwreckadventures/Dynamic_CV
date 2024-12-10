@@ -120,6 +120,17 @@ const CVList = () => {
 
                   {expandedId === cv._id && (
                     <div className="cv-details">
+                      {cv.personalInfo.photo && (
+                        <img
+                          src={cv.personalInfo.photo}
+                          alt="Profile"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            borderRadius: "50%",
+                          }}
+                        />
+                      )}
                       <p>
                         <strong>Email:</strong> {cv.personalInfo.email}
                       </p>

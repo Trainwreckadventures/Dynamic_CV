@@ -92,6 +92,36 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
           />
         </label>
         <label>
+          <strong>Upload Photo:</strong>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  setEditedCv((prev) => ({
+                    ...prev,
+                    personalInfo: {
+                      ...prev.personalInfo,
+                      photo: reader.result as string,
+                    },
+                  }));
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+        </label>
+        {editedCv.personalInfo.photo && (
+          <img
+            src={editedCv.personalInfo.photo}
+            alt="Profile Preview"
+            style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+          />
+        )}
+        <label>
           <strong>Email:</strong>
           <input
             type="email"

@@ -13,6 +13,7 @@ export interface CV {
     name: string;
     email: string;
     phone: string;
+    photo?: string;
   };
   skills: string[];
   experience: { title: string; company: string; years: string }[];

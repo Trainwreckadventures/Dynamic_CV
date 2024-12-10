@@ -10,76 +10,84 @@ const CVPdf: React.FC<CVPdfProps> = ({ cv }) => {
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
 
-    //her går ting på x og y akser ift plassering...looks terrible! :')
+    //Photo:
+    if (cv.personalInfo.photo) {
+      doc.addImage(cv.personalInfo.photo, "JPEG", 160, 20, 40, 40);
+    }
+
+    // CV:
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    doc.text("CV", 10, 10);
+    let yOffset = 20;
+    doc.text("CV", 10, yOffset);
 
-    //!picture?
-
-    //name, email, phone:
-    doc.setFontSize(12);
-    doc.text(`Name: ${cv.personalInfo.name}`, 10, 20);
-    doc.text(`Email: ${cv.personalInfo.email}`, 10, 30);
-    doc.text(`Phone: ${cv.personalInfo.phone}`, 10, 40);
-    //need some space between previous and skills:
+    yOffset += 20;
     doc.setFontSize(14);
-    doc.text("Skills:", 10, 50);
+
+    // Name:
+    doc.setFont("helvetica", "bold");
+    doc.text("Name:", 10, yOffset);
+    doc.setFont("helvetica", "normal");
+    doc.text(cv.personalInfo.name, 30, yOffset);
+    yOffset += 10;
+
+    //Email:
+    doc.setFont("helvetica", "bold");
+    doc.text("Email:", 10, yOffset);
+    doc.setFont("helvetica", "normal");
+    doc.text(cv.personalInfo.email, 30, yOffset);
+    yOffset += 10;
+
+    //Phone:
+    doc.setFont("helvetica", "bold");
+    doc.text("Phone:", 10, yOffset);
+    doc.setFont("helvetica", "normal");
+    doc.text(cv.personalInfo.phone, 30, yOffset);
+    yOffset += 20;
+
+    const drawHeader = (title: string) => {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.text(title, 10, yOffset);
+      doc.setFont("helvetica", "normal");
+      yOffset += 10;
+    };
+
+    // Skills:
+    drawHeader("Skills:");
     doc.setFontSize(12);
     cv.skills.forEach((skill, index) => {
-      doc.text(`- ${skill}`, 10, 60 + index * 10);
+      doc.text(`- ${skill}`, 10, yOffset + index * 10);
     });
-    //education here:
-    doc.setFontSize(14);
-    doc.text("Education:", 10, 80 + cv.skills.length * 10);
-    doc.setFontSize(12);
+    yOffset += cv.skills.length * 10 + 10;
+
+    // Education:
+    drawHeader("Education:");
     cv.education.forEach((edu, index) => {
       doc.text(
         `${edu.institution}, ${edu.degree} (${edu.year})`,
         10,
-        90 + index * 10 + cv.skills.length * 10
+        yOffset + index * 10
       );
     });
-    //experience here:
-    doc.setFontSize(14);
-    doc.text(
-      "Experience:",
-      10,
-      110 + cv.skills.length * 10 + cv.education.length * 10
-    );
-    doc.setFontSize(12);
+    yOffset += cv.education.length * 10 + 10;
+
+    // Experience:
+    drawHeader("Experience:");
     cv.experience.forEach((exp, index) => {
       doc.text(
         `${exp.title} at ${exp.company} (${exp.years})`,
         10,
-        120 + index * 10 + cv.skills.length * 10 + cv.education.length * 10
+        yOffset + index * 10
       );
     });
-    //references here:
-    doc.setFontSize(14);
-    doc.text(
-      "References:",
-      10,
-      140 +
-        cv.skills.length * 10 +
-        cv.education.length * 10 +
-        cv.experience.length * 10
-    );
-    doc.setFontSize(12);
-    cv.references.forEach((ref, index) => {
-      doc.text(
-        `${ref.name} - ${ref.contactInfo}`,
-        10,
-        150 +
-          index * 10 +
-          cv.skills.length * 10 +
-          cv.education.length * 10 +
-          cv.experience.length * 10
-      );
-    });
+    yOffset += cv.experience.length * 10 + 10;
 
-    //const lineY = 290;
-    //doc.setLineWidth(0.5);
-    //doc.line(10, lineY, 200, lineY);
+    // References:
+    drawHeader("References:");
+    cv.references.forEach((ref, index) => {
+      doc.text(`${ref.name} - ${ref.contactInfo}`, 10, yOffset + index * 10);
+    });
 
     doc.save(`${cv.personalInfo.name}_CV.pdf`);
   };
