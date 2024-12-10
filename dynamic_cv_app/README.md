@@ -25,7 +25,7 @@
 This is a **Dynamic CV App** built using **React**, **TypeScript**, and **Redux Toolkit** for dynamically generating and managing resumes.
 
 📌 You can see how I planned and executed the project here:  
-[Planning Board on Miro](https://miro.com/app/board/uXjVPNX8E7w=/?share_link_id=278666658249)
+[Eksamen Rammeverk](https://miro.com/app/board/uXjVPNX8E7w=/?share_link_id=278666658249)
 
 I spent considerable time mulling over the folder structure, distinguishing "need-to-have" versus "nice-to-have" features, creating a schedule to work within the project timeframe, and organizing resources. I am proud of the planning that went into this project.
 
