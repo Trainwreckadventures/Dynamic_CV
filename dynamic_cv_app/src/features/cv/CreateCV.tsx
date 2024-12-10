@@ -12,6 +12,7 @@ const CreateCV = () => {
     name: "",
     email: "",
     phone: "",
+    photo: "",
   });
   const [skills, setSkills] = useState<string[]>([""]);
   const [education, setEducation] = useState([
@@ -67,6 +68,20 @@ const CreateCV = () => {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPersonalInfo((prev) => ({
+          ...prev,
+          photo: reader.result as string,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="form-group">
@@ -98,7 +113,19 @@ const CreateCV = () => {
             required
           />
         </div>
-
+        <div>
+          <label>Upload Profile Photo:</label>
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+          {personalInfo.photo && (
+            <div>
+              <img
+                src={personalInfo.photo}
+                alt="Profile Preview"
+                style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+              />
+            </div>
+          )}
+        </div>
         <h4>Skills:</h4>
         {skills.map((skill, index) => (
           <div key={index}>
