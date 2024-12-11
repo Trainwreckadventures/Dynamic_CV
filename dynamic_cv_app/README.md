@@ -131,7 +131,9 @@ Here are some of the pre existing ones:
 - **Role Assignment**: I'd like admin to be able to alter the role from user to admin.
 - **Picture Metadata**: The pictures get stored with a lot of metadata to crudcrud, I am trying to figure out how to make it so less string get's sendt (but it hasn't been a fruitfull hunt yet).
 - **Authentication Security**: I'd like to add json web token, salt and bcrypt to this project. I am unsure how this will work with crudcrud.
-  (I have made it so you can not access the same things when you log in, but I have not set up protective routes because I wanted to keep the layout simple). -**Testing**: I have yet to do testing on my app, but I am hoping to be able to before hand in! -**Unexpected behaviour**: If you delete a user, their CV should probably be deleted to. Still working it out.
+  (I have made it so you can not access the same things when you log in, but I have not set up protective routes because I wanted to keep the layout simple). -**Testing**: I have not yet been able to fully implement Jest or React DevTools testing with my app. I remain committed to learning, though I suspect I’ll need to explore plenty of tutorials during the holidays, as testing has proven to be a challenging area for me.
+
+  -**Unexpected behaviour**: If you delete a user, their CV should probably be deleted to. Still working it out.
 
 ---
 
