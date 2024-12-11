@@ -1,7 +1,17 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "es2020",
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["jest", "node", "@testing-library/react"],
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["testing/**/*"],
+  "exclude": ["node_modules"],
+  "references": []
 }
