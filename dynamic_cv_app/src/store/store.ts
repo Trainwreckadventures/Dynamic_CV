@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
 import { api } from "../services/api"; // RTK Query
 import { devToolsEnhancer } from "@redux-devtools/extension";
@@ -9,8 +9,8 @@ export const store = configureStore({
     [api.reducerPath]: api.reducer, // RTK Query
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware), // Add RTK Query middleware
-  devTools: process.env.NODE_ENV !== "production" ? devToolsEnhancer() : false, // DevTools
+    getDefaultMiddleware().concat(api.middleware),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export type RootState = ReturnType<typeof store.getState>;
