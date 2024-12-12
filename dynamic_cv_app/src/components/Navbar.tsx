@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { RootState } from "../store/store";
 import "../styles/Navbar.css";
-
+//the navigationbar for all my pages:
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { userId } = useSelector((state: RootState) => state.auth);
-
+  //on log out go back to log in page:
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");

@@ -2,15 +2,17 @@ import React, { useState, useRef } from "react";
 import { CV } from "../../utils/types";
 
 interface EditCVProps {
+  //the existing cv data to edit:
   cv: CV;
   onSave: (updatedCv: CV) => void;
   onCancel: () => void;
 }
 
 const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
+  // the state to hold the edited CV data:
   const [editedCv, setEditedCv] = useState<CV>(cv);
   const newItemRef = useRef<HTMLInputElement | null>(null);
-
+  // handle input change for different sections here:
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     field: string,
@@ -21,16 +23,18 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
       ...editedCv,
       [section]: editedCv[section].map((item: any, i) => {
         if (i === index) {
+          //update skill:
           if (section === "skills") {
             return e.target.value;
           }
+          //update field:
           return { ...item, [field]: e.target.value };
         }
         return item;
       }),
     });
   };
-
+  //adding a new item here:
   const handleAdd = (
     section: "skills" | "education" | "experience" | "references"
   ) => {
@@ -55,7 +59,7 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
       });
     }
   };
-
+  //handeling the removal from a section here:
   const handleRemove = (
     section: "skills" | "education" | "references" | "experience",
     index: number
@@ -65,11 +69,11 @@ const EditCV: React.FC<EditCVProps> = ({ cv, onSave, onCancel }) => {
       [section]: editedCv[section].filter((_, i) => i !== index),
     });
   };
-
+  //saving the updated CV:
   const handleSave = () => {
     onSave(editedCv);
   };
-
+  //on edit this is what you see:
   return (
     <div className="form-group">
       <h3>Edit CV</h3>

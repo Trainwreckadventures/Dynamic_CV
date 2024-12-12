@@ -5,7 +5,7 @@ import { CV } from "../../utils/types";
 interface CVPdfProps {
   cv: CV;
 }
-
+//you move things around with the yOffset, it took some tries to get the pdf to look somewhat ok.
 const CVPdf: React.FC<CVPdfProps> = ({ cv }) => {
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
@@ -91,7 +91,7 @@ const CVPdf: React.FC<CVPdfProps> = ({ cv }) => {
 
     doc.save(`${cv.personalInfo.name}_CV.pdf`);
   };
-
+  //press button to download your CV as a pdf:
   return <button onClick={handleGeneratePDF}>Download PDF</button>;
 };
 

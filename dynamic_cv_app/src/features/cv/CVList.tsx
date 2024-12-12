@@ -14,10 +14,12 @@ const CVList = () => {
   const { isAuthenticated, role, userId } = useSelector(
     (state: RootState) => state.auth
   );
+  // fetching CVs from API:
   const { data: cvs, isLoading, error } = useGetCvsQuery();
+  // API mutations for delete and update:
   const [deleteCv] = useDeleteCvMutation();
   const [updateCv] = useUpdateCvMutation();
-
+  // managing expanded CVs and editing the CV/CVs (local state):
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editingCvId, setEditingCvId] = useState<string | null>(null);
   const [editedCv, setEditedCv] = useState<Partial<CV>>({
@@ -27,25 +29,25 @@ const CVList = () => {
     education: [],
     references: [],
   });
-
+  // you'll get the alert once so it doesen't get to annoying:
   const [alertShown, setAlertShown] = useState(false);
-
+  //you need to be logged in to see the CV/CVs
   if (!isAuthenticated) {
     return <div>Please log in to view stored CVs.</div>;
   }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading CVs</div>;
-
+  // filtering CVs based on user role (admin or user).
   const filteredCvs: CV[] =
     role === "admin"
       ? cvs || []
       : cvs?.filter((cv) => cv.user === userId) || [];
-
+  // toggle expand/collapse of CV details (the colaps might not be as intuitive as the expand)
   const toggleExpand = (id: string) => {
     setExpandedId((prevId) => (prevId === id ? null : id));
   };
-
+  // handeling the deletion of a CV here (with a message):
   const handleDelete = async (id: string) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this CV? This will permanently delete the CV from the server."
@@ -60,7 +62,7 @@ const CVList = () => {
       alert("Failed to delete CV. Please try again.");
     }
   };
-
+  // handle CV editing here (I added the save button message because it's all the way at the bottom):
   const handleEdit = (cv: CV) => {
     if (!alertShown) {
       alert("Remember to press the save button after making your changes!");
@@ -69,14 +71,14 @@ const CVList = () => {
     setEditingCvId(cv._id);
     setEditedCv({ ...cv });
   };
-
+  // handle saving of edited CVs here:
   const handleSave = async (updatedCv: CV) => {
     const sanitizedCv: Partial<CV> = { ...updatedCv };
 
     if (sanitizedCv._id) {
       delete sanitizedCv._id;
     }
-
+    //there might be a more sophisticated way to handle the id besides sanitaze, but this is how I chose to solved it.
     try {
       await updateCv({ id: updatedCv._id, cv: sanitizedCv }).unwrap();
       alert("CV updated successfully!");

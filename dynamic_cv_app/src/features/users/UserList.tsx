@@ -7,19 +7,20 @@ import {
 } from "../../services/api";
 import { RootState } from "../../store/store";
 import { User } from "../../utils/types";
-//!making sure admin can change roles prooved to be more difficult than I first thought...need to figgure it out! maybe I only have one admin...overworked admin...
+
 const UserList = () => {
   const { isAuthenticated, role, userId } = useSelector(
     (state: RootState) => state.auth
   );
-
+  // fetching users using RTK Query here:
   const { data: users, error, isLoading, refetch } = useGetUsersQuery();
+  // mutation hooks for deleting and updating users here:
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();
-
+  // this is the state for handling user editing:
   const [editingUserId, setEditingUserId] = useState<string | null>(null);
   const [editedUser, setEditedUser] = useState<Partial<User>>({});
-
+  // handle user deletion here (with warning):
   const handleDelete = async (id: string) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this user?"
@@ -34,12 +35,12 @@ const UserList = () => {
       alert("Failed to delete user. Please try again.");
     }
   };
-
+  // handel edit here:
   const handleEdit = (user: User) => {
     setEditingUserId(user._id);
     setEditedUser(user);
   };
-
+  // handle save here:
   const handleSave = async () => {
     if (!editingUserId) return;
 
@@ -47,7 +48,7 @@ const UserList = () => {
       ...users?.find((u) => u._id === editingUserId),
       ...editedUser,
     };
-
+    //removing id before sending to avoid duplicates:
     const sanitizedUser = { ...fullUser };
     delete sanitizedUser._id;
 
@@ -58,23 +59,24 @@ const UserList = () => {
       alert("User updated successfully!");
       setEditingUserId(null);
       setEditedUser({});
+      //refetching user data from api:
       refetch();
     } catch (error) {
       console.error("Error updating user", error);
       alert("Failed to update user. Please try again.");
     }
   };
-
+  // not logged in?:
   if (!isAuthenticated) {
     return <div>Please log in to view the user list.</div>;
   }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading users</div>;
-
+  // role based filtering here:
   const filteredUsers =
     role === "admin" ? users : users?.filter((user) => user._id === userId);
-  //! need to fix the ugly layout when I edit!
+  // based on your role you will see either see all users as admin, or your own user as user:
   return (
     <div className="container">
       <div className="form-group">

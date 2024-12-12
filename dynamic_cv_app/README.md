@@ -151,9 +151,13 @@ Here are some of the pre existing ones:
 
   -**Unexpected behaviour**: If you delete a user, their CV should probably be deleted to.
 
+  (it might also be slightly annoying for admin/user that they can't click the create CV page if have a CV in the api)
+
 ---
 
 ## Reflection Notes
+
+At first I didn't want to put comments in my code, I wanted to keep it as clean as possible. After thinking about it I came to the conclution that it can't hurt to add some commentary.
 
 I think I still have a long way to go before I can create good modular code, I often prefer to separate logic a little, but not to much.
 With the edit logic it seemed like the best idea to keep it separate from the CV list because it was a lot of text. But I often prefer to keep a lot of code in the same place without refracturing to much. I think I do this because I am a newbie, so I get very attatched to code that works. I have a hard time starting over or "killing my darlings" even if it would make the overall quality of the project better. Sometimes I'll ask chat gpt if I am following best practice just for me to get upset and blatantly ignore the answer if the suggestion is to split up code to make it more buildable. I think with more knowledge, practice and confidence that this will evolve in a positive trajectory in the future. But for now I prefer the way I code because it feels confortable.
@@ -165,8 +169,6 @@ a) Ensure the testing tools are compatible with your project, and
 b) Start testing early on. Testing a little at a time makes the process feel much more manageable. If I did that, I think it would have been more manageable.
 
 At least I know where I need to put more of my focus.
-
----
 
 ## Sources
 

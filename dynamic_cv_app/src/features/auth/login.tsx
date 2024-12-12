@@ -18,12 +18,12 @@ const LoginForm = () => {
 
   const [name, setName] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
-
+  // handeling the login logic here:
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isLoading) return;
-
+    // finding the user with the matching email:
     const user = users?.find((user) => user.email === email);
 
     if (!user) {
@@ -35,22 +35,21 @@ const LoginForm = () => {
       setErrorMessage("Incorrect password.");
       return;
     }
-
+    // dispatch login action with user ID and role here:
     dispatch(login({ userId: user._id, role: user.role }));
-
+    // redirects you to the dashboard upon successful login:
     navigate("/dashboard");
   };
-
+  // checking if the email is already in the API (prevents multiple users from the same email):
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const emailExists = users?.some((user) => user.email === email);
     if (emailExists) {
       console.error("A user with this email already exists.");
       alert("A user with this email already exists. Please log in instead.");
       return;
     }
-
+    // default role always user:
     const newUser: Partial<User> = {
       name,
       email,
@@ -60,17 +59,17 @@ const LoginForm = () => {
 
     try {
       const createdUser = await addUser(newUser).unwrap();
-
+      //log in action here:
       dispatch(login({ userId: createdUser._id, role: createdUser.role }));
       alert("User created successfully!");
-
+      // redirect to dashboard if it's successful:
       navigate("/dashboard");
     } catch (error) {
       console.error("Error creating user", error);
       alert("Failed to create user. Please try again.");
     }
   };
-
+  // form depending on if you are logging in as existing user, or creating a new user:
   return (
     <div className="container">
       <div className="form-group">
