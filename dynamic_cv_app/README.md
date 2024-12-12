@@ -14,8 +14,8 @@
    - [Non-registered Users](#non-registered-users)
    - [Registered Users](#registered-users)
    - [Admin Features](#admin-features)
-5. [Reflection Notes](#reflection-notes)
-6. [Challenges & Work in Progress](#challenges--work-in-progress)
+5. [Things I Am Still Working On](#Things-I-Am-Still-Working-On)
+6. [Reflection Notes](#reflection-notes)
 7. [Sources](#sources)
 
 ---
