@@ -1,3 +1,4 @@
+//Here I am defining the user:
 export interface User {
   _id: string;
   name: string;
@@ -5,7 +6,7 @@ export interface User {
   password: string;
   role: "admin" | "user";
 }
-
+//And here I am defining the cv
 export interface CV {
   _id: string;
   user: string;

@@ -7,24 +7,28 @@ import { useNavigate } from "react-router-dom";
 
 const CreateCV = () => {
   const { userId } = useSelector((state: RootState) => state.auth);
-
+  // state to manage the personal info fields here:
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     email: "",
     phone: "",
     photo: "",
   });
+  // state to mmanage skills (string array):
   const [skills, setSkills] = useState<string[]>([""]);
+  // state to manage education (object array):
   const [education, setEducation] = useState([
     { institution: "", degree: "", year: "" },
   ]);
+  // state to manage experience (object array):
   const [experience, setExperience] = useState([
     { title: "", company: "", years: "" },
   ]);
+  // state to manage references (object array):
   const [references, setReferences] = useState([{ name: "", contactInfo: "" }]);
   const [addCv] = useAddCvMutation();
   const navigate = useNavigate();
-
+  // handle change to the personal info fields here (name, email, phone):
   const handlePersonalInfoChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     field: string
@@ -34,7 +38,7 @@ const CreateCV = () => {
       [field]: e.target.value,
     }));
   };
-
+  // handle change to the array fields here:
   const handleArrayChange = (
     setState: React.Dispatch<React.SetStateAction<any[]>>,
     field: string,
@@ -45,7 +49,7 @@ const CreateCV = () => {
       prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
     );
   };
-
+  // handle the form submission of a new CV here:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -61,13 +65,14 @@ const CreateCV = () => {
     try {
       await addCv(newCv).unwrap();
       alert("CV created successfully!");
+      // redirect to CVs (cv-list) page
       navigate("/cv-list");
     } catch (error) {
       console.error("Error creating CV", error);
       alert("Failed to create CV. Please try again.");
     }
   };
-
+  // handles file input for photo, saves it as base64 dataURL (there might be a better way to solve this):
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -81,7 +86,7 @@ const CreateCV = () => {
       reader.readAsDataURL(file);
     }
   };
-
+  // here you see the Create CV form if you don't already have a CV saved to API:
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="form-group">

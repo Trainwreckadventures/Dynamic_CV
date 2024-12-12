@@ -4,13 +4,13 @@ import { RootState } from "../store/store";
 import { Navigate } from "react-router-dom";
 import CreateCV from "../features/cv/CreateCV";
 import { useGetCvsQuery } from "../services/api";
-
+//On this page you'll be able to fill in the CV form unless you allready have a CV in the api:
 const CreateCVPage = () => {
   const { isAuthenticated, userId } = useSelector(
     (state: RootState) => state.auth
   );
   const { data: userCvs, isLoading } = useGetCvsQuery();
-
+  //If the person isn't authenticated they get redirected to log in:
   if (!isAuthenticated) {
     return <Navigate to="/" />;
   }
@@ -20,7 +20,7 @@ const CreateCVPage = () => {
   }
 
   const existingCV = userCvs?.some((cv) => cv.user === userId);
-
+  // if the person allready has a CV they get redirected to the list:
   if (existingCV) {
     return (
       <div>

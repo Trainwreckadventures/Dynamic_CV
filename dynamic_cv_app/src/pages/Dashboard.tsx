@@ -5,13 +5,15 @@ import { RootState } from "../store/store";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  //are you authenticated? id? role?:
   const { isAuthenticated, userId, role } = useSelector(
     (state: RootState) => state.auth
   );
+  //fetching:
   const { data: users, isLoading, error } = useGetUsersQuery();
 
   const user = users?.find((u) => u._id === userId);
-
+  //if not logged in, tell person to log in by following link, if logged in get a greeting/info based on your role:
   return (
     <div className="container">
       <h2>Welcome to the Dynamic CV Maker!</h2>
