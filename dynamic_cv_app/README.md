@@ -39,13 +39,21 @@ I spent considerable time mulling over the folder structure, distinguishing "nee
 - **Vite** (v6.0.1)
 - **jsPDF** for PDF generation
 
+Why I chose typescript:
+I wanted to get more hands on experience with something else than JSX, I was looking for a chalenge and how it might work compared to what I was already used to. I enjoy it because of how perticular it is, I apreciate that TSX always need to know what the types are/the strict typing (I can relate to that on a personal level). It did however feel more complicated than what I am used to, but I am sure that I will understand more when I experiment mre with it, I am already planning my next project.
+
+Why I chose Redux Toolkit:
+I thought it sounded really interesting, and during the demo it appeared to make the project easier. It gives you a lot "for free" and makes tasks more manageable. I can't help but view it as "dark magic" because of what's going on behind the scenes with the store.
+
+I added RTK query to this project as well, I think it added to the usabiliy and coding experience, and I think it works well with Redux toolkit. It saved me a lot of time since I needed fewer slices and files to make the project work.
+
 ---
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Node.js** (v14.x or higher)
+- **Node.js**
 - **npm**
 
 ### Steps to Run the Project
@@ -57,16 +65,19 @@ after cloning the repo, you'll have to navigate to the right folder in the termi
 cd .\dynamic_cv_app\
 
 Getting started:
+
 Prerequisites
 
-Node.js (v14.x or higher)
+Node.js
 npm
 
-use
+use:
+npm install
 npm run dev
-when you want to start the local host
 
 ## API Information
+
+I have used: https://crudcrud.com/
 
 I have stored the API key in the `.env` file, but as a backup, I am leaving the details here in the README.  
 **Note:** This is not best practice, but since this project uses `crudcrud` (a temporary API), it is shared here for your convenience.
@@ -84,11 +95,15 @@ Here are some of the pre existing ones:
 
 - **Email**: `admin@example.com`
 - **Password**: `adminbruker`
+  **Do not delete admin**
+  (since the default role is user, please do not delete admin from the app).
 
 ### User with CV (and picture)
 
 - **Email**: `alfredeplesaus@example.com`
 - **Password**: `123password`
+  **Do not delete Alfred**
+  (he's my favourite, please do not delete my boy).
 
 ### User without CV (to create one)
 
@@ -100,7 +115,8 @@ Here are some of the pre existing ones:
 ### Non-registered Users
 
 - **Registration**:  
-  As a non-registered user, you must register first via the login page. Simply click the blue "Sign Up" link and provide your name, email, and password.
+  As a non-registered user, you must register first via the login page. Simply click the blue "Sign Up" link and provide the name, email, and password that you want.
+  (NB: this is not a "safe app" so please do not use a private email or password!)
   - Default role is set to **user**.
 - **Access and Management**:  
   Once registered, you can view and edit your profile information or delete your user account.
@@ -129,11 +145,11 @@ Here are some of the pre existing ones:
 ## Things I Am Still Working On
 
 - **Role Assignment**: I'd like admin to be able to alter the role from user to admin.
-- **Picture Metadata**: The pictures get stored with a lot of metadata to crudcrud, I am trying to figure out how to make it so less string get's sendt (but it hasn't been a fruitfull hunt yet).
+- **Picture Metadata**: The pictures get stored with a lot of metadata to crudcrud, I think I counted nearly 80 lines just for that bulbasaur picture (and since I can't access my creative cloud/photoshop I can't alter it myself either). There must be a better way to deal with that!
 - **Authentication Security**: I'd like to add json web token, salt and bcrypt to this project. I am unsure how this will work with crudcrud.
-  (I have made it so you can not access the same things when you log in, but I have not set up protective routes because I wanted to keep the layout simple). -**Testing**: I have not yet been able to fully implement Jest or React DevTools testing with my app. I remain committed to learning, though I suspect I’ll need to explore plenty of tutorials during the holidays, as testing has proven to be a challenging area for me.
+  (I have made it so you can not access the same things when you log in, but I have not set up protective routes because I wanted to keep the layout simple). -**Testing**: I have not yet been able to fully implement Jest or React DevTools testing with my app. I remain committed to learning, though I suspect I’ll need to explore plenty of tutorials during the holidays, as testing has proven to be a challenging.
 
-  -**Unexpected behaviour**: If you delete a user, their CV should probably be deleted to. Still working it out.
+  -**Unexpected behaviour**: If you delete a user, their CV should probably be deleted to.
 
 ---
 
@@ -142,12 +158,21 @@ Here are some of the pre existing ones:
 I think I still have a long way to go before I can create good modular code, I often prefer to separate logic a little, but not to much.
 With the edit logic it seemed like the best idea to keep it separate from the CV list because it was a lot of text. But I often prefer to keep a lot of code in the same place without refracturing to much. I think I do this because I am a newbie, so I get very attatched to code that works. I have a hard time starting over or "killing my darlings" even if it would make the overall quality of the project better. Sometimes I'll ask chat gpt if I am following best practice just for me to get upset and blatantly ignore the answer if the suggestion is to split up code to make it more buildable. I think with more knowledge, practice and confidence that this will evolve in a positive trajectory in the future. But for now I prefer the way I code because it feels confortable.
 
+I’m sure there are still some bugs I haven’t discovered, especially since I didn’t fully master the testing part of the project. I had a bit of an ego hit there, but I’m glad I gave it a try. If it weren’t for my "day of unsuccessfull" testing, I might not have realized I could accidentally add the same email multiple times. Even though I didn’t fully grasp testing, these little insights turned out to be valuable. Sometimes, happy little accidents...
+
+I’ve realized that if you want to integrate testing effectively, it’s important to:
+a) Ensure the testing tools are compatible with your project, and
+b) Start testing early on. Testing a little at a time makes the process feel much more manageable. If I did that, I think it would have been more manageable.
+
+At least I know where I need to put more of my focus.
+
 ---
 
 ## Sources
 
+- **Redux Dev**: https://redux-toolkit.js.org/tutorials/rtk-query
 - **ChatGPT**: For explanations and debugging:
   - Helped simplify explanations about Redux Toolkit, `.env` file usage, and PDF generation in React.
   - Suggested using a `types.ts` file for TypeScript, which saved me a lot of trouble.
 - **Stack Overflow**:
-  - [Styling with jsPDF](https://stackoverflow.com/questions/20460035/jspdf-cant-get-any-styling-to-work): Provided guidance on how to write logic for PDFs.
+  - [Styling with jsPDF](https://stackoverflow.com/questions/20460035/jspdf-cant-get-any-styling-to-work): Provided guidance on how to write logic for PDFs. -**GitHub**: https://github.com/dawood11/React-oppgaver/tree/master/Demo%20kode%202024 : helpfull practice and demos from the semester.
