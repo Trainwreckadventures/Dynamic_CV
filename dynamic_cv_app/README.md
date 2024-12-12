@@ -171,9 +171,9 @@ At least I know where I need to put more of my focus.
 ## Sources
 
 - **Redux Dev**: https://redux-toolkit.js.org/tutorials/rtk-query
+- **Github** https://github.com/dawood11/React-oppgaver/tree/master/Demo%20kode%202024 : helpfull practice and demos from the semester.
 - **ChatGPT**: For explanations and debugging:
   - Helped simplify explanations about Redux Toolkit, `.env` file usage, and PDF generation in React.
   - Suggested using a `types.ts` file for TypeScript, which saved me a lot of trouble.
 - **Stack Overflow**:
   - [Styling with jsPDF](https://stackoverflow.com/questions/20460035/jspdf-cant-get-any-styling-to-work): Provided guidance on how to write logic for PDFs.- - -
-- **Github** https://github.com/dawood11/React-oppgaver/tree/master/Demo%20kode%202024 : helpfull practice and demos from the semester.
