@@ -44,6 +44,13 @@ const LoginForm = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const emailExists = users?.some((user) => user.email === email);
+    if (emailExists) {
+      console.error("A user with this email already exists.");
+      alert("A user with this email already exists. Please log in instead.");
+      return;
+    }
+
     const newUser: Partial<User> = {
       name,
       email,
