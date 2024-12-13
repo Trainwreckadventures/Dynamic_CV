@@ -157,7 +157,7 @@ Here are some of the pre existing ones:
 
 ## Reflection Notes
 
-At first I didn't want to put comments in my code, I wanted to keep it as clean as possible. After thinking about it I came to the conclution that it can't hurt to add some commentary.
+At first I didn't want to put comments in my code, I wanted to keep it as clean as possible. After thinking about it I came to the conclution that it can't hurt to add it.
 
 I think I still have a long way to go before I can create good modular code, I often prefer to separate logic a little, but not to much.
 With the edit logic it seemed like the best idea to keep it separate from the CV list because it was a lot of text. But I often prefer to keep a lot of code in the same place without refracturing to much. I think I do this because I am a newbie, so I get very attatched to code that works. I have a hard time starting over or "killing my darlings" even if it would make the overall quality of the project better. Sometimes I'll ask chat gpt if I am following "best practice" just for me to get upset and blatantly ignore the advice if the suggestion is to split up code to make it more buildable. I think with more knowledge, practice and confidence that this will evolve in a positive trajectory in the future (I also think seeing more real life examples from real life people could help). But for now I prefer the way I code because it feels confortable, I am however willing to grow and learn.
@@ -170,7 +170,7 @@ b) Start testing early on. Testing a little at a time makes the process feel muc
 
 At least I know where I need to put more of my focus.
 
-I can also add that I struggled a lot with the CSS, I know it's not part of this exam, but for the overall look and to add user-friendliness I believe it to still hold value for my exam. I am happy I got to dust off the CSS skills and re-awaken them abit (but Here I also need more practice).
+I can also add that I struggled a lot with the CSS, I know it's not part of this exam, but for the overall look and to add user-friendliness I believe it to still hold value for my exam. I am happy I got to dust off the CSS skills and re-awaken them abit (but here I also need more practice).
 
 All in all I am content with the outcome and how much I have learnt during this project.
 
